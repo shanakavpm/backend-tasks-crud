@@ -59,3 +59,71 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Laravel Project Setup
+1. Clone the Project
+
+Clone the repository using the following command:
+
+git clone <repository_url>
+
+2. Navigate to the Project Directory
+
+Change into the project directory:
+
+cd project-directory
+
+3. Install Dependencies
+
+Ensure that Composer is installed, then install the project dependencies by running:
+
+composer install
+
+4. Set Up Environment File
+
+Copy the example environment file:
+
+cp .env.example .env
+
+Set your environment variables (e.g., database configuration, API URL) in the .env file.
+5. Generate Application Key
+
+Generate the application key by running:
+
+php artisan key:generate
+
+6. Run Database Migrations and Seeders
+
+Run the database migrations to create the necessary tables:
+
+php artisan migrate
+
+(Optional) To populate the database with sample data, run:
+
+php artisan db:seed
+
+7. Set Up PHPUnit Configuration
+
+Ensure the phpunit.xml configuration file is set up correctly. If missing, copy the default:
+
+Update PHPUnit Configuration
+
+Check the .env file for database connections and ensure they are configured for testing (e.g., using a separate test database).
+8. Run PHPUnit Tests
+
+To run PHPUnit tests, execute the following command:
+
+php artisan test
+
+Alternatively, you can use:
+
+./vendor/bin/phpunit
+
+This will run the test cases and show the results in the terminal.
+9. Serve the Application
+
+Start the Laravel development server:
+
+php artisan serve
+
+The application will be accessible at http://localhost:8000/login
