@@ -90,6 +90,7 @@ class TaskControllerTest extends TestCase
             'title' => 'Updated Title',
             'description' => 'Updated Description',
             'status' => 'completed',
+            'user_id' => $this->user->id
         ];
 
         // Send the request to update the task with the Authorization header
