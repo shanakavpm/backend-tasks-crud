@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -26,11 +26,9 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->text(),
             'user_id' => User::factory(),
-            'status' => $this->faker->randomElement(['pending', 'completed']),
+            'status' => $this->faker->randomElement(['priority', 'pending', 'completed']),
             'created_at' => now(),
             'updated_at' => now(),
         ];
     }
-
-
 }

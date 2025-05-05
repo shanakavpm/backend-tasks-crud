@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
-use App\Http\Requests\StoreTaskRequest;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function index(): JsonResponse
     {
         $tasks = Task::all();
+
         return response()->json([
             'success' => true,
             'data' => TaskResource::collection($tasks),
@@ -27,9 +26,6 @@ class TaskController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  StoreTaskRequest  $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreTaskRequest $request): JsonResponse
     {
@@ -45,9 +41,6 @@ class TaskController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  Task  $task
-     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Task $task): JsonResponse
     {
@@ -60,10 +53,6 @@ class TaskController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  StoreTaskRequest  $request
-     * @param  Task  $task
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(StoreTaskRequest $request, Task $task): JsonResponse
     {
@@ -78,9 +67,6 @@ class TaskController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  Task  $task
-     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Task $task): JsonResponse
     {

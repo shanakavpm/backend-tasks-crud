@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
@@ -13,14 +13,13 @@ class AuthControllerTest extends TestCase
     use RefreshDatabase;
 
     protected $user;
+
     protected $token;
 
     /**
      * Set up the user and token before each test.
-     *
-     * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,12 +32,10 @@ class AuthControllerTest extends TestCase
 
     /**
      * Helper method to set the Authorization header.
-     *
-     * @return array
      */
     protected function authenticatedHeader(): array
     {
-        return ['Authorization' => 'Bearer ' . $this->token];
+        return ['Authorization' => 'Bearer '.$this->token];
     }
 
     /**
@@ -56,17 +53,17 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/login', $loginData);
 
         $response->assertStatus(Response::HTTP_OK)
-                 ->assertJson([
-                     'success' => true,
-                     'message' => 'User logged in successfully.',
-                     'data' => [
-                         'token' => true,
-                         'user' => [
-                             'id' => $this->user->id,
-                             'name' => $this->user->name,
-                         ],
-                     ]
-                 ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'User logged in successfully.',
+                'data' => [
+                    'token' => true,
+                    'user' => [
+                        'id' => $this->user->id,
+                        'name' => $this->user->name,
+                    ],
+                ],
+            ]);
     }
 
     /**
@@ -84,10 +81,10 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/login', $loginData);
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED)
-                 ->assertJson([
-                     'success' => false,
-                     'message' => 'Incorrect email or password. Please try again.',
-                 ]);
+            ->assertJson([
+                'success' => false,
+                'message' => 'Incorrect email or password. Please try again.',
+            ]);
     }
 
     /**
@@ -107,17 +104,17 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/register', $registerData);
 
         $response->assertStatus(Response::HTTP_OK)
-                 ->assertJson([
-                     'success' => true,
-                     'message' => 'User created successfully.',
-                     'data' => [
-                         'token' => true,
-                         'user' => [
-                             'name' => 'Test User',
-                             'id' => true,
-                         ],
-                     ]
-                 ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'User created successfully.',
+                'data' => [
+                    'token' => true,
+                    'user' => [
+                        'name' => 'Test User',
+                        'id' => true,
+                    ],
+                ],
+            ]);
     }
 
     /**
@@ -137,7 +134,7 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/register', $registerData);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-                 ->assertJsonValidationErrors(['password']);
+            ->assertJsonValidationErrors(['password']);
     }
 
     /**
@@ -148,12 +145,12 @@ class AuthControllerTest extends TestCase
     public function test_logout_success()
     {
         $response = $this->withHeaders($this->authenticatedHeader())
-                         ->postJson('/api/logout');
+            ->postJson('/api/logout');
 
         $response->assertStatus(Response::HTTP_OK)
-                 ->assertJson([
-                     'success' => true,
-                     'message' => 'User logged out successfully.',
-                 ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'User logged out successfully.',
+            ]);
     }
 }

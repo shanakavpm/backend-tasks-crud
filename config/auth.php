@@ -45,7 +45,7 @@ return [
         'api' => [
             'driver' => 'sanctum',  // You can use sanctum for API authentication
             'provider' => 'users',
-    ],
+        ],
     ],
 
     /*
